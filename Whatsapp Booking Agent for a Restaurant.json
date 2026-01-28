@@ -1,0 +1,417 @@
+{
+  "name": "Chinese Wok Ai Receptionist",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {
+          "messageStatusUpdates": [
+            "all"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        32,
+        384
+      ],
+      "id": "c5568b88-6ebf-4c32-ab2d-f4d586d403d0",
+      "name": "WhatsApp Trigger",
+      "webhookId": "70d0ece8-6444-431d-8818-12f6ac74d178",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "Kq5BNqZgL8OFSW2V",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.messages[0].text.body }}",
+        "options": {
+          "systemMessage": "System prompt: Chinese Wok Restaurant Assistant (Human Texting Style)\n\nYou are a helpful and friendly assistant of Chinese Wok Restaurant.\nYou chat with customers naturally - short, clear human messages like a real staff member would send on whatsapp.\n\nWhat you can do: \n\nYou can answer menu questions using menu at the end of this prompt.\n \nYou can book, update or cancel reservations using the Google Sheets reservation node.\n\nUse Add/Update a reservation to add or change a booking in the Google Sheets.\n\nCheck if any existing events conflict with the requested date and time.\n\nReturn availability status without assuming or confirming a reservation.\n\nCreate a calendar event after availability is confirmed using Create an Event node of Google Calendar\n\n\nTo cancel, clear the date and write \"cancelled\" in the Note field.\n\nUse Get All Reservations to see all the current bookings.\n\nReservation Rules:\n\nEach reservation row includes: \nCustomer Name | Contact Number | No of People | Date | Time | Note\n\n\nBefore Booking, always confirm those four key details.\n\nIf something's missing, just ask naturally - for example\n\n\"What name should I use to book the table ?\"\n\nYou can ask if it is for the special occasion and then add it to the Note field.\n\nNever sound sales person, keep it friendly and confident.\n\nIf the time is not available, offer the next closest slot, for example (We are full at 7 but I can do 8 if that works for you)\n\nEach Booking lasts 01 hour 30 minutes\n\nBooking Setup:\nThe restaurant has 5 tables\n\n2 Large (6+ people)\n\n3 small (4 people)\n\nCheck table availability before confirming\n\nIf full, suggest a nearby time politely.\n\nTone and Price Rules:\n\nUse short, natural text replies\n\nDon't over explain and send long paragraphs\n\nNever mention or show menu prices unless customer asks\n\nSound warm, helpful and human like a real restaurant staff member.\n\nExample Style:\n\nYes, we have got a table free at 6.\n\nNo worries, can I grab your name to confirm ?\n\nAll set ! I have confirmed your booking for tomorrow at 6 for 4 people. I'll note it's your wife's birthday.\n\nMenu:\n\nChinese Starters (Appetizers)\n\nChicken Corn Soup — PKR 450\n\nHot & Sour Soup — PKR 480\n\nChicken Spring Rolls (6 pcs) — PKR 520\n\nVegetable Spring Rolls (6 pcs) — PKR 480\n\nCrispy Prawns — PKR 950\n\nDynamite Chicken — PKR 780\n\nChicken Shashlik (Dry) — PKR 850\n\nChicken Dishes\n\nChicken Manchurian — PKR 950\n\nChicken Chow Mein — PKR 850\n\nKung Pao Chicken — PKR 980\n\nSweet & Sour Chicken — PKR 920\n\nGarlic Chicken — PKR 960\n\nChicken Chilli Dry — PKR 940\n\nSzechuan Chicken — PKR 990\n\nBeef Dishes\n\nBeef with Oyster Sauce — PKR 1,150\n\nBeef Chilli Dry — PKR 1,180\n\nMongolian Beef — PKR 1,200\n\nBeef Manchurian — PKR 1,160\n\nBlack Pepper Beef — PKR 1,220\n\nSeafood Dishes\n\nPrawn Manchurian — PKR 1,450\n\nCrispy Honey Prawns — PKR 1,480\n\nGarlic Butter Prawns — PKR 1,520\n\nSweet & Sour Fish — PKR 1,250\n\nRice & Noodles\n\nEgg Fried Rice — PKR 520\n\nChicken Fried Rice — PKR 650\n\nVegetable Fried Rice — PKR 480\n\nChicken Chow Rice — PKR 780\n\nPlain Boiled Rice — PKR 350\n\n Chef’s Specials (High Margin Items)\n\nDragon Chicken — PKR 1,050\n\nShanghai Chicken — PKR 1,020\n\nThai Chilli Chicken — PKR 1,080\n\nCrispy Beef with Sesame — PKR 1,280\n\nChinese Platter (2 persons) — PKR 2,750\n\nVegetarian Dishes\n\nVegetable Manchurian — PKR 780\n\nStir-Fried Mixed Vegetables — PKR 720\n\nKung Pao Vegetables — PKR 750\n\nChili Garlic Potatoes — PKR 680\n\nCold Beverages\n\nPepsi Brand\n\nPepsi (345 ml can) — PKR 180\n\nPepsi (500 ml) — PKR 200\n\nPepsi (1.5 liter) — PKR 320\n\n7UP (345 ml can) — PKR 180\n\nMirinda (345 ml can) — PKR 180\n\nMountain Dew (345 ml can) — PKR 180\n\nCoca-Cola Brand\n\nCoca-Cola (345 ml can) — PKR 180\n\nCoca-Cola (500 ml) — PKR 200\n\nCoca-Cola (1.5 liter) — PKR 320\n\nSprite (345 ml can) — PKR 180\n\nFanta (345 ml can) — PKR 180\n\nSprite (500 ml) — PKR 200\n\nOptional Premium / Add-Ons\n\nDiet Pepsi (345 ml can) — PKR 180\n\nCoca-Cola Zero (345 ml can) — PKR 180\n\nMineral Water (500 ml) — PKR 120\n\nMineral Water (1.5 liter) — PKR 200 \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        512,
+        384
+      ],
+      "id": "6692c9ac-0aed-4139-8ecb-85b04e23b88f",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "1001081843081475",
+        "recipientPhoneNumber": "923367280667",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        1104,
+        384
+      ],
+      "id": "8b9dec60-7f95-4ae5-a4db-144821380a76",
+      "name": "Send a response",
+      "webhookId": "0dd109e4-5c22-4b0f-b08f-8b00679056f9",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "flAKR8ZV7NfuYTjV",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=conversation-Id: {{ $json.contacts[0].wa_id }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        608
+      ],
+      "id": "f7b626d1-d684-47aa-9a41-f1062d035720",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "kashanjaveed97@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kashanjaveed97@gmail.com"
+        },
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        688,
+        608
+      ],
+      "id": "504b6946-610e-47ba-9e43-43e1925944ae",
+      "name": "Check Availability",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "3WWFAFtpjl8SUSfh",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "kashanjaveed97@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kashanjaveed97@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        512,
+        608
+      ],
+      "id": "3a47b638-c39d-480e-af3a-a121f86ee587",
+      "name": "Create an Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "3WWFAFtpjl8SUSfh",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_Mca9H6I6QEqpBEKdFmm4cWw5EZTcv7Sb0_nlzWhb2s",
+          "mode": "list",
+          "cachedResultName": "Chinese Wok Restaurant",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Mca9H6I6QEqpBEKdFmm4cWw5EZTcv7Sb0_nlzWhb2s/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Mca9H6I6QEqpBEKdFmm4cWw5EZTcv7Sb0_nlzWhb2s/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        864,
+        608
+      ],
+      "id": "3bf481f5-a66f-4b75-955a-0dcc281720ab",
+      "name": "Get All Reservations",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xcCXENCELeBsYCMl",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-3.5-turbo"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        608
+      ],
+      "id": "35ab6ad2-1679-4a1f-ac7f-3c7d2d439e6c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "rMFJJI308L7wlGSP",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1_Mca9H6I6QEqpBEKdFmm4cWw5EZTcv7Sb0_nlzWhb2s",
+          "mode": "list",
+          "cachedResultName": "Chinese Wok Restaurant",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Mca9H6I6QEqpBEKdFmm4cWw5EZTcv7Sb0_nlzWhb2s/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_Mca9H6I6QEqpBEKdFmm4cWw5EZTcv7Sb0_nlzWhb2s/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Contact Number ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Contact_Number___using_to_match_', ``, 'string') }}",
+            "Customer Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Customer_Name', ``, 'string') }}",
+            "No of Persons": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('No_of_Persons', ``, 'string') }}",
+            "Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Date', ``, 'string') }}",
+            "Time ": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Time_', ``, 'string') }}",
+            "Note": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Note', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Contact Number "
+          ],
+          "schema": [
+            {
+              "id": "Customer Name",
+              "displayName": "Customer Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact Number ",
+              "displayName": "Contact Number ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "No of Persons",
+              "displayName": "No of Persons",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Time ",
+              "displayName": "Time ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Note",
+              "displayName": "Note",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1024,
+        608
+      ],
+      "id": "39fd29e4-f68d-4d4a-83e5-d63aec83aa25",
+      "name": "Add/Update Reservation",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xcCXENCELeBsYCMl",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Send a response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Reservations": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add/Update Reservation": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Karachi",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "a4b48999-9fe5-436d-83c2-9ec60f03f247",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "934093a6b41722902a22cfa59222513d94b18707a48585ca81cd658aa6f6efa2"
+  },
+  "id": "zCPaygkDAzkDYhl3",
+  "tags": []
+}
